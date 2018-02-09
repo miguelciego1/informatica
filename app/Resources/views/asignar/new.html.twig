@@ -1,0 +1,17 @@
+{% extends 'main.html.twig' %}
+
+{% block body %}
+    <div class="x_panel">
+      <div class="x_title">
+          <h2>Asignacion de personal</h2>
+          <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit" value="Create" />
+        {{ form_end(form) }}
+      </div>
+    </div>
+
+{% endblock %}

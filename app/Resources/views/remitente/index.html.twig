@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Remitentes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>App</th>
+                <th>Apm</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for remitente in remitentes %}
+            <tr>
+                <td><a href="{{ path('remitente_show', { 'id': remitente.id }) }}">{{ remitente.id }}</a></td>
+                <td>{{ remitente.nom }}</td>
+                <td>{{ remitente.app }}</td>
+                <td>{{ remitente.apm }}</td>
+                <td>
+                    <a href="{{ path('remitente_show', { 'id': remitente.id }) }}"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+
+                    <a href="{{ path('remitente_edit', { 'id': remitente.id }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('remitente_new') }}">Create a new remitente</a>
+        </li>
+    </ul>
+{% endblock %}

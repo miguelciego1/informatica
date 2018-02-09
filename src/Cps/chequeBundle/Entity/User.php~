@@ -1,0 +1,68 @@
+<?php
+// src/AppBundle/Entity/User.php
+
+namespace Cps\chequeBundle\Entity;
+
+use FOS\UserBundle\Entity\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="fos_user")
+ */
+class User extends BaseUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    
+    /*--------------------------------------------------------FORANEAS----------------------------------------------------------*/
+    /**
+     *@ORM\OneToMany(targetEntity="Cps\chequeBundle\Entity\comprobante", mappedBy="User")
+     */
+     protected $comprobante;
+    /*--------------------------------------------------------/FORANEAS----------------------------------------------------------*/
+    
+
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
+
+    /**
+     * Add comprobante
+     *
+     * @param \Cps\chequeBundle\Entity\comprobante $comprobante
+     * @return User
+     */
+    public function addComprobante(\Cps\chequeBundle\Entity\comprobante $comprobante)
+    {
+        $this->comprobante[] = $comprobante;
+
+        return $this;
+    }
+
+    /**
+     * Remove comprobante
+     *
+     * @param \Cps\chequeBundle\Entity\comprobante $comprobante
+     */
+    public function removeComprobante(\Cps\chequeBundle\Entity\comprobante $comprobante)
+    {
+        $this->comprobante->removeElement($comprobante);
+    }
+
+    /**
+     * Get comprobante
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComprobante()
+    {
+        return $this->comprobante;
+    }
+}

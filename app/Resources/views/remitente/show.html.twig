@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Remitente</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ remitente.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ remitente.nom }}</td>
+            </tr>
+            <tr>
+                <th>App</th>
+                <td>{{ remitente.app }}</td>
+            </tr>
+            <tr>
+                <th>Apm</th>
+                <td>{{ remitente.apm }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('remitente_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('remitente_edit', { 'id': remitente.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

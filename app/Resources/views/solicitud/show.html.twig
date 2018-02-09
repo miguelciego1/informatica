@@ -1,0 +1,267 @@
+{% extends 'main.html.twig' %}
+{% block css %}
+    <style>
+    .x_panel{
+        height:100%;
+    }
+    .devacio{
+        font-weight:normal;
+        font-size:15px;
+    }
+    .vacio{
+        font-weight:normal;
+        font-size:15px;
+    }
+    .img{
+        height:70px;
+        width:70px;
+        float:left;
+    }
+    .numero{
+        width:7%;
+        font-family:castellar;
+        font-size:15px;
+    }
+    .ruta{
+         width:43%;
+         font-family:castellar;
+         text-align:center;
+         font-size:15px;
+    }
+    .fecha{
+         width:50%;
+         font-family:castellar;
+         text-align:center;
+         font-size:15px;
+    }
+    .de{
+        width:50%;
+        font-weight:normal;
+        font-size:15px;
+    }
+    .obv2{
+        width:33%;
+        font-size:12px;
+    }
+    .obv{
+        width:33%;
+        font-size:15px;
+    }
+    .obv1{
+        width:33%;
+        height:70px;
+    }
+    .ce{
+        width:60%;
+    }
+    .vaciode{
+        width:50%;
+    }
+    .nota{
+        width:100%;
+        font-size:16px;
+    }
+    .nota2{
+        width:100%;
+        height:80px;
+    }
+    caption{
+        padding-top: 8px;
+        padding-bottom: 8px;
+        color: #73879C;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+    .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+        border:1px solid #ddd;
+    }
+    @media print {
+    .numero{
+        width:8%;
+        font-family:castellar;
+        font-size:15px;
+    }
+    .ruta{
+         width:42%;
+         font-family:castellar;
+         text-align:center;
+         font-size:15px;
+    }
+    #print{
+            display:none;
+    }
+    .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+        border:1px solid #000;
+    }
+    caption{
+        padding-top: 8px;
+        padding-bottom: 8px;
+        color: #000;
+        text-align: left;
+        border: 0px solid #3e3e3e;
+        background-color: #3e3e3e;
+        font-weight:bold;
+        font-size:14px;
+    }
+    .legend {
+        display: block;
+        width: 100%;
+        padding: 0;
+        margin-bottom: 20px;
+        font-size: 21px;
+        line-height: inherit;
+        color: #000;
+        border: 0;
+        border-bottom: 1px solid #000;
+    }
+    h3{
+        font-size:18px;
+        font-family:castellar;
+    }
+    h4{
+        font-size:14px;
+        font-family:castellar;
+    }
+    .x_panel{
+        border:0px;
+    }
+    }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="x_panel">
+        <div id="print" class="x_title">
+            <h2 id="print">HOJA DE RUTA <small>( {{ solicitud.ruta }} )</small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+                </li>
+                    <li class="dropdown">
+                    <a type="button"  data-toggle="modal" data-target="#myModal" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                    </li>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+                {# CONTENIDO#}
+                <br></br>
+                <center>
+                    <div class="ce">
+                        <img  src="{{ asset('logom.png') }}" class="img"  class="imgtitle"></img>
+                        <H3>CAJA PETROLERA DE SALUD</H3>
+                        <H3>REGIONAL SANTA CRUZ</H3>
+                        <H4><b>HOJA DE RUTA</b></H4>
+                    </div>
+                </center>
+
+                <legend></legend>
+
+                <div class="container">
+                    <table class="table">
+                        <tr>
+                            <th class="numero"> N° </th>
+                            <th class="ruta"> {{ solicitud.ruta }}</th>
+                            <th class="fecha"> FECHA : {% if solicitud.fecha %}{{ solicitud.fecha|date('d/m/Y') }}{% endif %}</th>
+                        </tr>
+                    </table>
+                    <p></p>
+                    <table class="table">
+                        <tr>
+                            <th class="de">
+                                {#<p> De : Ing. Hans Galarza Cortez </p>
+                                <p><B>Jefe Unidad Tecnología Informática a.i. </B></p>#}
+                                <p> De : Ing. Rosmery Callejas Salguero</p>
+                                <p><B>Jefe Unidad Tecnología Informática </B></p>
+                            </th>
+                            <th class="devacio"> A :
+                              {% if valor != 2 %}
+                                  {% for per in lista %}
+                                      {{per.pref}} {{ per.nom|capitalize }} {{ per.app|capitalize }} {{ per.apm|capitalize }} <p></p>
+                                  {% endfor %}
+                              {% endif %}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="de">
+                            Atencion a nota Cite : <b>{{solicitud.cite}}</b>
+                            </th>
+                            <th class="vacio">
+                                <p>FECHA :</p>
+                            </th>
+                        </tr>
+                    </table>
+                    <table class="table">
+                        <tr>
+                            <th class="nota"><b>Referencia :</b> {{ solicitud.referencia}} </th>
+                        </tr>
+                        <tr>
+                            <th class="nota">Su gentil atención para:</th>
+                        </tr>
+                        <tr>
+                            <th class="nota2"></th>
+                        </tr>
+                        <tr>
+                            <th class="nota"><u>Nota</u>: Se adjunta nota de respaldo</th>
+                        </tr>
+                    </table>
+                    <table class="table">
+                        <caption><CENTER>FIRMA DE RECEPCION</CENTER></caption>
+                        <tr>
+                            <tr>
+                                <th class="obv1"> </th>
+                                <th class="obv1"> </th>
+                                <th class="obv1"> </th>
+                            </tr>
+                            <tr>
+                                <th class="obv">Fecha: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;{% if solicitud.fecha %}{{ solicitud.fecha|date('Y') }}{% endif %}</th>
+                                <th class="obv">Fecha: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;{% if solicitud.fecha %}{{ solicitud.fecha|date('Y') }}{% endif %}</th>
+                                <th class="obv">Fecha: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;{% if solicitud.fecha %}{{ solicitud.fecha|date('Y') }}{% endif %}</th>
+                            </tr>
+                        {#</tr>#}
+                    </table>
+                    <table class="table">
+                        <tr>
+                            <tr>
+                                <th class="obv2">Seguimiento a realizar : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;{% if solicitud.fecha %}{{ solicitud.fecha|date('Y') }}{% endif %} </th>
+                                <th class="obv2"> Seguimiento a realizar : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;{% if solicitud.fecha %}{{ solicitud.fecha|date('Y') }}{% endif %}</th>
+                                <th class="obv2"> Seguimiento a realizar : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;{% if solicitud.fecha %}{{ solicitud.fecha|date('Y') }}{% endif %}</th>
+                            </tr>
+                            <tr>
+                                <th class="obv1"> </th>
+                                <th class="obv1"> </th>
+                                <th class="obv1"> </th>
+                            </tr>
+                        {#</tr>#}
+                    </table>
+                    <br></br>
+                    <br></br>
+                    <label>MJCV/&nbsp;{% if solicitud.fecha %}{{ solicitud.fecha|date('Y') }}{% endif %}</label>
+                </div>
+                {#CONTENIDO#}
+            </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;
+              </button>
+              <h4 class="modal-title">Asignar Personal</h4>
+            </div>
+            <div class="modal-body">
+              {{ form_start(form) }}
+                  {{ form_widget(form) }}
+            </div>
+            <div class="modal-footer">
+              <input class="btn btn-success" type="submit" value="Guardar" />
+              {{ form_end(form) }}
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+        {#--------------------------------------------------------------------------------------------------------------------------------------#}
+{% endblock %}

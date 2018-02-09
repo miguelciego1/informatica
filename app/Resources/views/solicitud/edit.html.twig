@@ -1,0 +1,108 @@
+{% extends 'main.html.twig' %}
+{% block css %}
+    <style>
+    .as{
+        margin-top:5px;
+    }
+    .x_panel{
+        height:800px;
+    }
+    .target{
+        Display:none;
+    }
+    </style>
+     {{ form_stylesheet(edit_form) }}
+{% endblock%}
+{% block js %}
+    {{ form_javascript(edit_form) }}
+{% endblock %}
+{% block body %}
+
+    <div class="col-md-12">
+        {% for flashMessaje in app.session.flashbag.get ('mensaje')%}
+            <div  class="alert alert-info alert-dismissible" role="alert" >
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                 {{ flashMessaje}}
+            </div>
+        {% endfor%}
+    </div>
+    <div class="col-md-12">
+        <div class="x_panel">
+        <div class="x_title">
+            {# COLOCAR EL TITULO#}
+            <h2>Modificar Solicitud <small> « Editar »</small></h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form_start(edit_form) }}
+                    <br></br>
+                        <div class="col-md-12">
+
+                            <div class="form_group">
+                                <div class="row">
+                                    {{ form_label(edit_form.fecha, 'Fecha de Solicitud :') }}
+
+                                    <div class="col-md-5">
+                                        {{ form_errors(edit_form.fecha) }}
+                                        {{ form_widget(edit_form.fecha,{ 'attr': {'class' :'form-control'} }) }}
+                                    </div>
+                                </div><br></br>
+                            </div>
+
+                            <div class="form_group">
+                                <div class="row">
+                                    {{ form_label(edit_form.ruta, 'Numero :') }}
+
+                                    <div class="col-md-5">
+                                        {{ form_errors(edit_form.ruta) }}
+                                        {{ form_widget(edit_form.ruta,{ 'attr': {'class' :'form-control'} }) }}
+                                    </div>
+                                </div><br></br>
+                            </div>
+                            <div class="form_group">
+                                <div class="row">
+                                    {{ form_label(edit_form.cite, 'Cite :') }}
+
+                                    <div class="col-md-5">
+                                        {{ form_errors(edit_form.cite) }}
+                                        {{ form_widget(edit_form.cite,{ 'attr': {'class' :'form-control'} }) }}
+                                    </div>
+                                </div><br></br>
+                            </div>
+
+                            <div class="form_group">
+                                <div class="row">
+                                    {{ form_label(edit_form.remitente, 'Remitente :') }}
+
+                                    <div class="col-md-5">
+                                        {{ form_errors(edit_form.remitente) }}
+                                        {{ form_widget(edit_form.remitente,{ 'attr': {'class' :'form-control'} }) }}
+                                    </div>
+                                </div><br></br>
+                            </div>
+
+                            <div class="form_group">
+                                <div class="row">
+                                    {{ form_label(edit_form.referencia, 'Referencia :') }}
+
+                                    <div class="col-md-5">
+                                        {{ form_errors(edit_form.referencia) }}
+                                        {{ form_widget(edit_form.referencia,{ 'attr': {'class' :'form-control'} }) }}
+                                        <br><input class="btn btn-primary pull-right" type="submit" value="Modificar" />
+                                        <a class="btn btn-default pull-right" href="{{ path('solicitud_index')}}">Volver Atras</a>
+                                    </div>
+                                </div><br></br>
+                            </div>
+                        </div>
+                        {{ form_widget(edit_form) }}
+                    {{ form_end(edit_form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

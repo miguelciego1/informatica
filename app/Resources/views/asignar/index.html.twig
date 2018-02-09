@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Asignars list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for asignar in asignars %}
+            <tr>
+                <td><a href="{{ path('asignar_show', { 'id': asignar.id }) }}">{{ asignar.id }}</a></td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('asignar_show', { 'id': asignar.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('asignar_edit', { 'id': asignar.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('asignar_new') }}">Create a new asignar</a>
+        </li>
+    </ul>
+{% endblock %}

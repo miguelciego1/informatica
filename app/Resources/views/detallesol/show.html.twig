@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Detallesol</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ detallesol.id }}</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{% if detallesol.fecha %}{{ detallesol.fecha|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Observacion</th>
+                <td>{{ detallesol.observacion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('detallesol_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('detallesol_edit', { 'id': detallesol.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

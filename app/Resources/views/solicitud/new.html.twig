@@ -1,0 +1,159 @@
+{% extends 'main.html.twig' %}
+{% block css %}
+    <style>
+    .as{
+        margin-top:5px;
+    }
+    .x_panel{
+        height:800px;
+    }
+    .target{
+        Display:none;
+    }
+    </style>
+     {{ form_stylesheet(form) }}
+{% endblock%}
+{% block js %}
+    {{ form_javascript(form) }}
+{% endblock %}
+{% block body %}
+
+    <div class="col-md-12">
+        {% for flashMessaje in app.session.flashbag.get ('mensaje')%}
+            <div  class="alert alert-success alert-dismissible" role="alert" >
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                 {{ flashMessaje}}
+            </div>
+        {% endfor%}
+    </div>
+    <div class="col-md-12">
+        <div class="x_panel">
+        <div class="x_title">
+            {# COLOCAR EL TITULO#}
+            <h2>Registro de Solicitud <small> « Nuevo »</small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+                </li>
+                    <li class="dropdown">
+                    <a type="button"  data-toggle="modal" data-target="#myModal" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i></a>
+                    </li>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form_start(form) }}
+                    <br></br>
+                        <div class="col-md-12">
+
+                            <div class="form_group">
+                                <div class="row">
+                                    {{ form_label(form.fecha, 'Fecha de Solicitud :') }}
+
+                                    <div class="col-md-5">
+                                        {{ form_errors(form.fecha) }}
+                                        {{ form_widget(form.fecha,{ 'attr': {'class' :'form-control'} }) }}
+                                    </div>
+                                </div><br></br>
+                            </div>
+
+                            <div class="form_group">
+                                <div class="row">
+                                    {{ form_label(form.ruta, 'Numero :') }}
+
+                                    <div class="col-md-5">
+                                        {{ form_errors(form.ruta) }}
+                                        {{ form_widget(form.ruta,{ 'attr': {'class' :'form-control'} }) }}
+                                    </div>
+                                </div><br></br>
+                            </div>
+
+                            <div class="form_group">
+                                <div class="row">
+                                    {{ form_label(form.cite, 'Cite :') }}
+
+                                    <div class="col-md-5">
+                                        {{ form_errors(form.cite) }}
+                                        {{ form_widget(form.cite,{ 'attr': {'class' :'form-control'} }) }}
+                                    </div>
+                                </div><br></br>
+                            </div>
+
+                            <div class="form_group">
+                                <div class="row">
+                                    {{ form_label(form.remitente, 'Remitente :') }}
+
+                                    <div class="col-md-5">
+                                        {{ form_errors(form.remitente) }}
+                                        {{ form_widget(form.remitente,{ 'attr': {'class' :'form-control'} }) }}
+                                    </div>
+                                </div><br></br>
+                            </div>
+
+                            <div class="form_group">
+                                <div class="row">
+                                    {{ form_label(form.referencia, 'Referencia :') }}
+                                    <div class="col-md-5">
+                                        {{ form_errors(form.referencia) }}
+                                        {{ form_widget(form.referencia,{ 'attr': {'class' :'form-control'} }) }}
+                                        <br><input class="btn btn-success pull-right" type="submit" value="Guardar" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_widget(form) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {#--------------------------------------------------------------------------------------------------------------------------------------#}
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;
+              </button>
+              <h4 class="modal-title">Registro de Remitente</h4>
+            </div>
+            <div class="modal-body">
+              <p>
+                {{ form_start(formb, { 'attr' : {'novalidate':'novalidate', 'role': 'form'} }) }}
+                    <div class="form_group">
+                            {#{{ form_label(form.cheque, '') }}#}
+                            {{ form_errors(formb.nombre) }}
+                            {{ form_widget(formb.nombre,{ 'attr': {'class' :'form-control as', 'placeholder':'Nombre Completo'} }) }}
+                    </div>
+                     <div class="form_group">
+                            {#{{ form_label(form.cheque, '') }}#}
+                            {{ form_errors(formb.cargo) }}
+                            {{ form_widget(formb.cargo,{ 'attr': {'class' :'form-control as', 'placeholder':'Cargo'} }) }}
+                    </div>
+
+                    <div class="form_group">
+                            {#{{ form_label(form.cheque, '') }}#}
+                            {{ form_errors(formb.servicio) }}
+                            {{ form_widget(formb.servicio,{ 'attr': {'class' :'form-control as', 'placeholder':'Servicio'} }) }}
+                    </div>
+                    {{ form_widget(formb) }}
+
+              </p>
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-success" type="submit" value="Guardar" />
+                {{ form_end(formb) }}
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+        {#--------------------------------------------------------------------------------------------------------------------------------------#}
+    </div>
+
+{% endblock %}

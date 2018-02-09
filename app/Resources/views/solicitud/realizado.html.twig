@@ -1,0 +1,96 @@
+{% extends 'main.html.twig' %}
+
+{% block css %}
+    <style>
+    .x_content{
+        height:100%;
+    }
+    .fila{
+        width:800px;
+    }
+    </style>
+{% endblock%}
+{% block body %}
+    <div class="row">
+    <div class="col-md-12">
+      {% for flashMessaje in app.session.flashbag.get ('mensaje')%}
+           <div  class="alert alert-success alert-dismissible" role="alert" >
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                   <span aria-hidden="true">&times;</span></button>
+                {{ flashMessaje}}
+           </div>
+      {% endfor%}
+    <div class="x_panel">
+        <div class="page-title">
+              <div class="title_left">
+                  <h2>Lista de Solicitudes<small> ({{pagination.getTotalItemCount}})</small></h2>
+              </div>
+
+                  <div class="title_right">
+                       <form method="get" action="" class="form-inline" role="search">
+                    <div class="form-group pull-right top_search ">
+
+                      <div class="input-group">
+
+                        <input type="text" value="{{ app.request.get('query') }}" name="query" class="form-control" placeholder="Buscar por hoja de ruta.">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </span>
+                      </div>
+                    </div>
+                    </form>
+                  </div>
+        </div>
+        <div class="x_title">
+         {#<h2>Listado de Almacén<small>()</small></h2>#}
+        <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Ruta</th>
+                        <th>Cite</th>
+                        <th>Remitente</th>
+                        <th>Referencia</th>
+			<th>Asignado</th>	
+                        <th>Estado</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for solicitud in pagination %}
+                    <tr>
+                        <td>{% if solicitud.fecha %}{{ solicitud.fecha|date('Y-m-d') }}{% endif %}</td>
+                        <td>{{ solicitud.ruta }}</td>
+                        <td>{{ solicitud.cite|upper }}</td>
+                        <td>{{solicitud.nombre|upper }}</td>
+                        <td>{{ solicitud.referencia|upper }}</td>
+			<td>{{ solicitud.personal|upper }}</td>
+                        <td>
+                            {%if solicitud.estado == 3 %}
+                                <span class="label label-success">Realizado</span>
+                            {%endif%}
+                        </td>
+                        <td>
+                            <a class="btn btn-default" href="{{ path('solicitud_show', { 'id': solicitud.id }) }}"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+                            <a class="btn btn-primary" href="{{ path('solicitud_edit', { 'id': solicitud.id }) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

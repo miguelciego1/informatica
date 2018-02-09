@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Detallesols list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Observacion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for detallesol in detallesols %}
+            <tr>
+                <td><a href="{{ path('detallesol_show', { 'id': detallesol.id }) }}">{{ detallesol.id }}</a></td>
+                <td>{% if detallesol.fecha %}{{ detallesol.fecha|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ detallesol.observacion }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('detallesol_show', { 'id': detallesol.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('detallesol_edit', { 'id': detallesol.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('detallesol_new') }}">Create a new detallesol</a>
+        </li>
+    </ul>
+{% endblock %}

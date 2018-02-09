@@ -1,0 +1,39 @@
+{% extends 'main.html.twig' %}
+
+{% block body %}
+    <h1>Personals list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Servicio</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for personal in personals %}
+            <tr>
+                <td><a href="{{ path('personal_show', { 'id': personal.id }) }}">{{ personal.id }}</a></td>
+                <td>{{ personal.nom }} {{ personal.app }} {{ personal.apm }} </td>
+                <td>
+                    {%if personal.servicio == 1%}Sistema
+                    {%endif%}
+                    {%if personal.servicio == 2%}Redes
+                    {%endif%}
+                    {%if personal.servicio == 3%}Serv. Tecnico
+                    {%endif%}
+                    {%if personal.servicio == 4%}Archivo
+                    {%endif%}
+                </td>
+                <td>
+                    <a class="btn btn-default" href="{{ path('personal_show', { 'id': personal.id }) }}">mostrar</a>
+                    <a class="btn btn-primary" href="{{ path('personal_edit', { 'id': personal.id }) }}">Editar</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('personal_new') }}" class="btn btn-success">Nuevo Personal</a>
+{% endblock %}

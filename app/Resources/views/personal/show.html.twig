@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Personal</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ personal.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ personal.nom }}</td>
+            </tr>
+            <tr>
+                <th>App</th>
+                <td>{{ personal.app }}</td>
+            </tr>
+            <tr>
+                <th>Apm</th>
+                <td>{{ personal.apm }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('personal_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('personal_edit', { 'id': personal.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

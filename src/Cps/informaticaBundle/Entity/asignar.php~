@@ -1,0 +1,44 @@
+<?php
+
+namespace Cps\informaticaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * asignar
+ *
+ * @ORM\Table(name="infor_asignar")
+ * @ORM\Entity(repositoryClass="Cps\informaticaBundle\Repository\asignarRepository")
+ */
+class asignar
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    ////////////////////////////////////////////FORANEAS ///////////////////////////////////////////////////////////////
+    /**
+     *@ORM\ManyToOne(targetEntity="Cps\informaticaBundle\Entity\solicitud", inversedBy="asignar")
+     *@ORM\JoinColumn(nullable=false)
+     */
+      protected $solicitud;
+    /**
+     *@ORM\ManyToOne(targetEntity="Cps\informaticaBundle\Entity\personal", inversedBy="asignars")
+     *@ORM\JoinColumn(nullable=false)
+     */
+      protected $personal;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}
